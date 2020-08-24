@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from './user.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  apiUrl = 'https://jsonplaceholder.typicode.com/users';
+  apiUrl = environment.apiUrl;
 
   constructor(private _http: HttpClient) {}
 
