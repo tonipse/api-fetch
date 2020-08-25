@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from './user.model';
-import { DataService } from './data.service';
+import { User } from './_models/user.model';
+import { Task } from './_models/task.model';
+import { DataService } from './_services/data.service';
+import { TasksService } from './_services/tasks.service';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +11,28 @@ import { DataService } from './data.service';
 })
 export class AppComponent implements OnInit {
   users$: User[];
+  tasks$: Task[];
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    private taskDataService: TasksService
+  ) {}
 
-  ngOnInit() {
+  getTaskData() {
+    console.log('task');
+    return this.taskDataService
+      .getTasks()
+      .subscribe((data) => (this.tasks$ = data));
+  }
+  getUserData() {
+    console.log('user');
     return this.dataService
       .getUsers()
       .subscribe((data) => (this.users$ = data));
+  }
+
+  ngOnInit() {
+    this.getUserData();
+    this.getTaskData();
   }
 }

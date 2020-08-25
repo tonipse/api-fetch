@@ -2,3 +2,7 @@
   <h2>{{ user.name }} - {{ user.id }}</h2>
   <p>{{ user.email }}</p>
 </div>
+<div *ngFor="let task of tasks$">
+  <h3>{{ task.title }}</h3>
+  <p>Task is Done: {{ task.isDone }}</p>
+</div>
